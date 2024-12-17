@@ -9,15 +9,11 @@ app = Flask(__name__, template_folder='.')
 fake = Faker("en_US")
 domains = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]
 
-def fetch_city_zipcode_data(url: str, token: str):
+def fetch_city_zipcode_data():
+    url = "https://raw.githubusercontent.com/AbderrezakLzone/country-map/refs/heads/main/US/state.json"
     try:
-        # Add the token to the authorization header
-        headers = {
-            'Authorization': f'Bearer {token}'
-        }
-
         # Send a request to fetch the file
-        response = requests.get(url, headers=headers)
+        response = requests.get(url)
 
         if response.status_code == 200:
             # Convert the content into JSON
@@ -30,14 +26,9 @@ def fetch_city_zipcode_data(url: str, token: str):
         return False
 
 def generate_random_person():
-    # URL of the file in the GitHub repository
-    url = "https://raw.githubusercontent.com/AbderrezakLzone/country-map/refs/heads/main/US/state.json"
-
-    # Your GitHub Personal Access Token (replace with your token)
-    token = "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"
 
     # Use the function to fetch the data
-    city_zipcode_data = fetch_city_zipcode_data(url, token)
+    city_zipcode_data = fetch_city_zipcode_data()
     if not city_zipcode_data:
         return False
 
