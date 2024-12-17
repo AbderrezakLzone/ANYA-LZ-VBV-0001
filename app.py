@@ -134,7 +134,6 @@ def check_card(token, random_person, card):
         }
     }
 
-
     headers = {
         'User-Agent': random_person['useragent'],
         'Content-Type': "application/json",
@@ -177,9 +176,7 @@ def process_payment(card, month, year, cvv):
 def parse_response(card, month, year, cvv):
     response = process_payment(card, month, year, cvv)
     if "ERROR" in response:
-        parts = response.split("ERROR:")
-        error_message = parts[1].strip() if len(parts) > 1 else "Unknown"
-        return ERROR, f"Error from the bot ({error_message}), please try again later."
+        return ERROR, response
 
     # Format response
     formatted_response = ' '.join(word.capitalize() for word in response.split('_'))
