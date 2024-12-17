@@ -34,7 +34,7 @@ def generate_random_person():
     url = "https://raw.githubusercontent.com/AbderrezakLzone/country-map/refs/heads/main/US/state.json"
 
     # Your GitHub Personal Access Token (replace with your token)
-    token = "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"
+    token = "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"
 
     # Use the function to fetch the data
     city_zipcode_data = fetch_city_zipcode_data(url, token)
@@ -208,8 +208,8 @@ def index():
         exp_year = request.form['exp_year']
         cvv = request.form['cvv']
 
-        result = parse_response(card_number, exp_month, exp_year, cvv)
-        return render_template('result.html', result=result)
+        status, response = parse_response(card_number, exp_month, exp_year, cvv)
+        return render_template('result.html', status=status, response=response)
 
     return render_template('index.html')
 
